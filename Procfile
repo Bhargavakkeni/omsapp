@@ -1,1 +1,1 @@
-web: gunicorn ProjectsOfDjango.wsgi
+web: gunicorn 'ProjectsOfDjango.wsgi'
