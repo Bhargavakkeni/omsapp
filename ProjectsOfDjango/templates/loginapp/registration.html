@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        label {
+            display: block;
+            padding: 10px;
+        }
+
+        div.container {
+            margin: auto;
+            width: 100%;
+        }
+
+        div.row {
+            margin: auto;
+            width: 50%;
+        }
+
+
+        input {
+            width: 50%;
+            display: block;
+            padding: 6px;
+            margin: 0px 11px;
+        }
+
+        #Submit,
+        #reset {
+            color: white;
+            background-color: black;
+            margin: 18px;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        h1 {
+            color: navy;
+        }
+
+        span {
+            color: red;
+        }
+
+        p {
+            color: red;
+            font-size: large;
+        }
+    </style>
+
+    <!--script to verify password-->
+    <script>
+        function verifyPass() {
+            //console.log('function call');
+            password = document.getElementById("password").value;
+            confirmpassword = document.getElementById("confirmpassword").value;
+            //console.log(password, confirmpassword);
+            if (password != confirmpassword) {
+                alert("password doesn't match");
+                return false;
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-1">
+                <h1>User Registration</h1>
+            </div>
+
+            <!--to send the user details for entering the data into model-->
+            <div class="col-2">
+                <form id="registerForm" action="uploading" method="GET" autocomplete="on"
+                    onsubmit="return verifyPass()">
+                    <label for="userName">User Name <span>*</span></label>
+                    <input type="text" name="userName" id="userName" autofocus required>
+                    <label for="password">Password <span>*</span></label>
+                    <input type="password" name="password" id="password" required>
+                    <label for="confirmpassword">Confirm Password <span>*</span></label>
+                    <input type="password" name="confirmpassword" id="confirmpassword" required>
+                    <!--<input type="button" id="confrmpass" value="Verify Password" onclick="verifyPass()">-->
+                    <input type="submit" name="Submit" id="Submit" value="Submit">
+                    <input type="reset" name="reset" id="reset" value="Reset">
+                </form>
+            </div>
+
+            <!--redirects the user to login page-->
+            <div class="col-3">
+                <p>Already a user? <a href="loginpage">Login</a></p>
+            </div>
+
+            <!--redirects the user to login page if registered successfuly-->
+            <div class="col-4">
+                {% if error %}
+                <p>User Already exist</p>
+                <script>
+                    alert('User already exist');
+                </script>
+                {% endif %}
+                {% if verify %}
+                <p>Registration successful</p>
+                <script>
+                    alert('Registration successful');
+                    window.open("loginpage", "_self");
+                </script>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
