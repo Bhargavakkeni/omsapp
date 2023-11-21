@@ -5,7 +5,7 @@ from django.template import loader
 # Create your views here.
 
 #global name to associate user with records and login
-adminName=''
+#adminName=''
 
 #for notifying starting of server
 def root(request):
@@ -18,7 +18,7 @@ def index(request):
 
 #for verifying the user login details
 def verifyUser(request):
-    global adminName
+    #global adminName
     mydict={}
     username=request.GET['userName']
     password=request.GET['password']
@@ -38,9 +38,10 @@ def verifyUser(request):
         mydict={
             'verify':True,
             'error':False,
-            'name':username
+            'name':username,
+            #'adminName':username,
         }
-        adminName=username
+        #adminName=username
         #print(adminName)
     else:
         mydict['error']=True
@@ -76,8 +77,8 @@ def changepass(request):
     return HttpResponse(template.render(mydict,request))
 
 #for logging out
-def logout(request):
-    global adminName
+def logout(request,adminName=''):
+    #global adminName
     template = loader.get_template('loginapp/OmsAdmin1.html')
     adminName=''
     mydict={
@@ -115,18 +116,18 @@ def uploading(request):
     return HttpResponse(template.render(mydict,request))
 
 #for displaying a CRUD omsadmin page when login is successful
-def omsadmin(request):
+def omsadmin(request,adminName=''):
     template=loader.get_template('loginapp/OmsAdmin1.html')
     details=OmsAdmin.objects.filter(username_id=adminName).values()
     #print(details)
     mydict={
         'mydetails':details,
-        'adminName':adminName,
+        'adminName':adminName
     }
     return HttpResponse(template.render(mydict,request))
 
 #to show all the records associated with username
-def show(request):
+def show(request,adminName=''):
     details=OmsAdmin.objects.filter(username_id=adminName).values()
     #print(details)
     mydict={
@@ -138,7 +139,7 @@ def show(request):
     return HttpResponse(template.render(mydict,request))
 
 #to add new records to the omsadmin corresponding to the username
-def add(request):
+def add(request,adminName=''):
     details=OmsAdmin.objects.filter(username_id=adminName).values()
     brand=request.GET['brand']
     shipMethod=request.GET['shipMethod']
@@ -160,7 +161,7 @@ def add(request):
     return HttpResponse(template.render(mydict,request))
 
 #to update individual specified fields in the omsadmin
-def update(request):
+def update(request,adminName=''):
     details=OmsAdmin.objects.filter(username_id=adminName).values()
     template=loader.get_template('loginapp/OmsAdmin1.html')
     idUpdate=request.GET['idUpdate']
@@ -176,7 +177,7 @@ def update(request):
     return HttpResponse(template.render(mydict,request))
 
 #to delete specified records from omsadmin
-def delete(request):
+def delete(request,adminName=''):
     template=loader.get_template('loginapp/OmsAdmin1.html')
     idDelete=request.GET['idDelete']
     OmsAdmin.objects.filter(id=idDelete).delete()

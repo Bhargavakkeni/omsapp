@@ -103,7 +103,7 @@
                 <p>Welcome {{name}}</p>
                 <script>
                     alert('Welcome {{name}}!');
-                    window.open('../omsadmin', '_self');     //opens a new page which is dummy template if login successful
+                    window.open('../omsadmin/{{name}}', '_self');     //opens a new page which is dummy template if login successful
                     //'../' indicates go back to one url we skips loginpage url
                 </script>
                 {% endif %}
