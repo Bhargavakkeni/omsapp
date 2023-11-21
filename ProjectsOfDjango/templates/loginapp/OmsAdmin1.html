@@ -130,16 +130,20 @@
 
 <body>
     <nav>
-        <a href="omsadmin">Home</a>
+        <a href="../omsadmin/{{adminName}}" id="home">Home</a>
         <a href="/omsapp/registration" id="reg" class="right" >Register</a>
         <a href="/omsapp/loginpage" id="log" class="right">Login/</a>
-        <a href="logout" id="logout" style="display: none;" class="right">Logout</a>
+        <a href="../logout" id="logout" style="display: none;" class="right">Logout</a>
     </nav>
     {% if adminName %}
     <script>
         document.getElementById('reg').style.display='none';
         document.getElementById('log').style.display='none';
         document.getElementById('logout').style.display='inline-block';
+    </script>
+    {% else %}
+    <script>
+        document.getElementById('home').href='omsadmin';
     </script>
     {% endif %}
     <div class="container">
@@ -152,7 +156,7 @@
                 </table>
             </div>
             <div class="col">
-                <form action="add" method="get" id="myform">
+                <form action="../add/{{adminName}}" method="get" id="myform">
                     <table>
                         <tr>
                             <td>
@@ -228,7 +232,7 @@
                         </tr>
                         <tr>
                             <td style="text-align: right;">
-                                <a href="show">Show</a>
+                                <a href="../show/{{adminName}}">Show</a>
                             </td>
                             <td>
                                 <input type="submit" id="add" value="Add">
@@ -243,7 +247,7 @@
                         <th style="border: none;"> OMS Admin update details</th>
                     </tr>
                 </table>
-                <form action="update" method="get" id="updateform">
+                <form action="../update/{{adminName}}" method="get" id="updateform">
                     <table>
                         <tr>
                             <td>
@@ -297,7 +301,7 @@
                         <th style="border: none;"> OMS Admin delete details</th>
                     </tr>
                 </table>
-                <form action="delete" method="get" id="deleteform">
+                <form action="../delete/{{adminName}}" method="get" id="deleteform">
                     <table>
                         <tr>
                             <td>
