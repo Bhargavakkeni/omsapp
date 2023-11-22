@@ -116,7 +116,7 @@
         }
     </style>
     <script>
-        function typechange(){
+        function typeChange(){
             field=document.getElementById('fieldUpdate').value;
             if(field=='processingDate' || field=='availableToPromiseDate'){
                 document.getElementById('newValue').type='date';
@@ -156,7 +156,7 @@
                 </table>
             </div>
             <div class="col">
-                <form action="../add/{{adminName}}" method="get" id="myform">
+                <form action="../add/{{adminName}}" method="get" id="addform">
                     <table>
                         <tr>
                             <td>
@@ -232,11 +232,23 @@
                         </tr>
                         <tr>
                             <td style="text-align: right;">
-                                <a href="../show/{{adminName}}">Show</a>
+                                <a href="../show/{{adminName}}" id="show">Show</a>
                             </td>
+                            {% if adminName == '' %}
+                            <script>
+                                document.getElementById('show').href='omsadmin';
+                                document.getElementById('show').addEventListener("click",function(){alert('please login');});
+                            </script>
+                            {% endif %}
                             <td>
                                 <input type="submit" id="add" value="Add">
                             </td>
+                            {% if adminName == '' %}
+                            <script>
+                                document.getElementById('addform').action='omsadmin';
+                                document.getElementById('add').addEventListener("click",function(){alert('please login');});
+                            </script>
+                            {% endif %}
                         </tr>
                     </table>
                 </form>
@@ -266,7 +278,7 @@
                                 <label for="fieldUpdate">Select field to update</label>
                             </td>
                             <td>
-                                <select name="fieldUpdate" id="fieldUpdate" onchange="typechange()">
+                                <select name="fieldUpdate" id="fieldUpdate" onchange="typeChange()">
                                     <option value="brand">Brand</option>
                                     <option value="shipMethod">Ship Method</option>
                                     <option value="processingDays">Processing Days</option>
@@ -291,6 +303,12 @@
                             <td class="right">
                                 <input type="submit" id="update" value="Update">
                             </td>
+                            {% if adminName == '' %}
+                            <script>
+                                document.getElementById('updateform').action='omsadmin';
+                                document.getElementById('update').addEventListener("click",function(){alert('please login');});
+                            </script>
+                            {% endif %}
                         </tr>
                     </table>
                 </form>
@@ -319,6 +337,12 @@
                             <td class="right">
                                 <input type="submit" name="delete" id="delete" value="Delete">
                             </td>
+                            {% if adminName == '' %}
+                            <script>
+                                document.getElementById('deleteform').action='omsadmin';
+                                document.getElementById('delete').addEventListener("click",function(){alert('please login');});
+                            </script>
+                            {% endif %}
                         </tr>
                     </table>
                 </form>
