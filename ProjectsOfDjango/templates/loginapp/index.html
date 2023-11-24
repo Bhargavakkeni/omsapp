@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         label {
             display: block;
@@ -17,7 +19,7 @@
         }
 
         div.row {
-            margin: auto;
+            margin: 20px auto;
             width: 50%;
         }
 
@@ -36,25 +38,26 @@
             margin: 18px;
             padding: 8px;
             cursor: pointer;
+            border-radius: 1rem;
         }
 
         body {
             background-color: aliceblue;
-            margin:0;
+            margin: 0;
         }
 
-        h1{
+        h1 {
             color: white;
             background-color: black;
             margin-top: 0px;
             padding: 10px;
         }
 
-        h1 a{
+        h1 a {
             text-decoration: none;
         }
 
-         h2 {
+        h2 {
             color: navy;
         }
 
@@ -78,27 +81,33 @@
 
     <div class="container">
 
-        <div class="row">
+        <div class="row card card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
 
-            <div class="col-1">
+            <div class="col card-title">
                 <h2>User Login</h2>
             </div>
 
             <!--To send the user login details for verification-->
-            <div class="col-2">
-                <form action="verifyUser" method="GET"> <!--using 'verifyUser' instead '/verifyUser makes the path till now directly append to it instead from project urls.py-->
+            <div class="col card-body">
+                <form action="verifyUser" method="GET">
+                    <!--using 'verifyUser' instead '/verifyUser makes the path till now directly append to it instead from project urls.py-->
                     <label for="userName">User Name <span>*</span></label>
-                    <input type="text" name="userName" id="userName" autocomplete="off" autofocus required>
+                    <input type="text" class="form-control" name="userName" id="userName" autocomplete="off" autofocus required>
                     <label for="password">Password <span>*</span></label>
-                    <input type="password" name="password" id="password" autocomplete="off" required>
-                    <input type="submit" name="submit" id="submit" value="Login">
-                    <input type="reset" name="reset" id="reset" value="Reset">
+                    <input type="password" class="form-control" name="password" id="password" autocomplete="off" required>
+                    <input type="submit"  name="submit" id="submit" value="Login">
+                    <input type="reset"  name="reset" id="reset" value="Reset">
                 </form>
+
+                <!--Redirects the user to registration page-->
+                <!--<div class="col card-body">-->
+                <p>New user? <a href="../registration">Register here</a> </p>
+
+                <p>Forgot Password? <a href="../resetpass">Reset here</a> </p>
+                <!--</div>-->
             </div>
-
-
             <!--if verified loads the new page else notifies the user to try again-->
-            <div class="col-3">
+            <div class="col">
                 {% if verify %}
                 <p>Welcome {{name}}</p>
                 <script>
@@ -115,14 +124,7 @@
                 {% endif %}
             </div>
 
-            <!--Redirects the user to registration page-->
-            <div class="col-4">
-                <p>New user? <a href="../registration">Register here</a> </p>
-            </div>
 
-            <div class="col-4">
-                <p>Forgot Password? <a href="../resetpass">Reset here</a> </p>
-            </div>
 
         </div>
 

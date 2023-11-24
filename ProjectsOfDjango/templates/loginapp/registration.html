@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         label {
             display: block;
@@ -17,8 +19,9 @@
         }
 
         div.row {
-            margin: auto;
+            margin: 20px auto;
             width: 50%;
+
         }
 
 
@@ -36,6 +39,7 @@
             margin: 18px;
             padding: 8px;
             cursor: pointer;
+            border-radius: 1rem;
         }
 
         body {
@@ -76,30 +80,30 @@
 
     <div class="container">
 
-        <div class="row">
+        <div class="row card card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
 
-            <div class="col-1">
+            <div class="col card-title">
                 <h1>User Registration</h1>
             </div>
 
             <!--to send the user details for entering the data into model-->
-            <div class="col-2">
+            <div class="col card-body">
                 <form id="registerForm" action="uploading" method="GET" autocomplete="on"
                     onsubmit="return verifyPass()">
                     <label for="userName">User Name <span>*</span></label>
-                    <input type="text" name="userName" id="userName" autofocus required>
+                    <input type="text" class="form-control" name="userName" id="userName" autofocus required>
                     <label for="password">Password <span>*</span></label>
-                    <input type="password" name="password" id="password" required>
+                    <input type="password" class="form-control" name="password" id="password" required>
                     <label for="confirmpassword">Confirm Password <span>*</span></label>
-                    <input type="password" name="confirmpassword" id="confirmpassword" required>
+                    <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" required>
                     <!--<input type="button" id="confrmpass" value="Verify Password" onclick="verifyPass()">-->
                     <input type="submit" name="Submit" id="Submit" value="Submit">
                     <input type="reset" name="reset" id="reset" value="Reset">
                 </form>
-            </div>
 
-            <!--redirects the user to login page-->
-            <div class="col-3">
+
+                <!--redirects the user to login page-->
+
                 <p>Already a user? <a href="loginpage">Login</a></p>
             </div>
 
