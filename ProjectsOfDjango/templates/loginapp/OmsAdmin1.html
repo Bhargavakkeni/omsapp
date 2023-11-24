@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OMS Admin1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    
     <style>
         table {
             border-collapse: collapse;
-            border: 1px solid black;
+            /*border: 1px solid black;*/
             margin: 15px auto;
             width: 70%;
             /*controling the size of the table*/
@@ -17,7 +21,7 @@
         th,
         td {
             /* text-align: left;*/
-            border: 1px solid black;
+            /*border: 1px solid black;*/
             padding: 10px;
         }
 
@@ -27,13 +31,13 @@
 
         tr:nth-child(even) {
             /*background-color: rgba(150, 212, 212, 0.4);*/
-            background-color: floralwhite;
+            background-color: rgba(240, 128, 128, 0.5);
         }
 
         /*th:nth-child(even),*/
         tr:nth-child(odd) {
             /* background-color: rgba(150, 212, 212, 0.4);*/
-            background-color: snow;
+            background-color: lavenderblush;
         }
 
         td label {
@@ -61,6 +65,9 @@
         input[type="button"] {
             width: 177px;
         }
+        .row{
+            flex-direction: column;
+        }
 
         div.row {
             margin: 71px auto;
@@ -68,10 +75,11 @@
 
         * {
             font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color:maroon;
         }
 
         body {
-            background-color: seashell;
+            background-color: ghostwhite;
             margin: 0;
         }
 
@@ -104,6 +112,7 @@
             display: inline-block;
             padding: 3px;
             font-size: larger;
+            color: aqua;
         }
 
         a.right {
@@ -116,6 +125,17 @@
 
         td.right {
             text-align: right;
+        }
+        .w3-card-4{
+            margin-top: 32px;
+            margin-bottom: 32px;
+        }
+        .form-control{
+            border: 1px solid black;
+            width: auto;
+        }
+        select.form-control{
+            width: 30%;
         }
     </style>
     <script>
@@ -163,7 +183,7 @@
         document.getElementById('updateform').action = 'omsadmin';
         document.getElementById('deleteform').action = 'omsadmin';
 
-        document.getElementById('show').addEventListener("click",alertLogin);
+        document.getElementById('show').addEventListener("click", alertLogin);
         function alertLogin() {
             alert('please login');
 
@@ -173,250 +193,255 @@
     {% endif %}
     <div class="container">
         <div class="row">
-            <div class="col">
-                <table style="border: none;">
-                    <tr>
-                        <th style="border: none;"> OMS Admin {{adminName}}</th>
-                    </tr>
-                </table>
+            
+                <div class="col card">
+                    <form action="../add/{{adminName}}" method="get" id="addform" onsubmit="return alertLogin()">
+                        <table class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                            <tr>
+                                <th colspan="2">
+                                    OMS Admin {{adminName}}
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="brand">Brand</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="brand" name="brand" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="shipMethod">Ship Method</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="shipMethod" name="shipMethod" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="processingDays">Processing Days</label>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" id="processingDays" name="processingDays" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="processingDaysType">Processing Days Type</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="processingDaysType" name="processingDaysType" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="min">Min</label>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" id="min" name="min" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="max">Max</label>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" id="max" name="max" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="processingDate">Processing Date</label>
+                                </td>
+                                <td>
+                                    <input type="date" class="form-control" id="processingDate" name="processingDate" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="availableToPromiseDate">Available To Promise Date</label>
+                                </td>
+                                <td>
+                                    <input type="date" class="form-control" id="availableToPromiseDate" name="availableToPromiseDate"
+                                        required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="cutOff">CutOff</label>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" id="cutOff" name="cutOff" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <a href="../show/{{adminName}}" id="show">Show</a>
+                                </td>
+                                {% if adminName == '' %}
+                                <script>
+                                    document.getElementById('show').href = 'omsadmin';
+                                    document.getElementById('show').addEventListener("click", function () { alert('please login'); });
+                                </script>
+                                {% endif %}
+                                <td>
+                                    <input type="submit" id="add" value="Add">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+                <div class="col card">
+                    <form action="../update/{{adminName}}" method="get" id="updateform" onsubmit="return alertLogin()">
+                        <table class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                            <tr>
+                                <th colspan="2">
+                                    OMS Admin update details
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="idUpdate">Select id to update</label>
+                                </td>
+                                <td>
+                                    <select name="idUpdate" class="form-control" id="idUpdate">
+                                        {% for x in mydetails %}
+                                        <option value="{{x.id}}">{{x.id}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="fieldUpdate">Select field to update</label>
+                                </td>
+                                <td>
+                                    <select name="fieldUpdate" class="form-control" id="fieldUpdate" onchange="typeChange()">
+                                        <option value="brand">Brand</option>
+                                        <option value="shipMethod">Ship Method</option>
+                                        <option value="processingDays">Processing Days</option>
+                                        <option value="processingDaysType">Processing Days Type</option>
+                                        <option value="min">Min</option>
+                                        <option value="max">Max</option>
+                                        <option value="processingDate">Processing Date</option>
+                                        <option value="availableToPromiseDate">Available To Promise Date</option>
+                                        <option value="cutOff">CutOff</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="newValue">Enter new value</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="newValue" name="newValue" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="right" colspan="2">
+                                    <input type="submit" id="update" value="Update">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            
+                <div class="col card">
+                    <form action="../delete/{{adminName}}" method="get" id="deleteform" onsubmit="return alertLogin()">
+                        <table class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                            <tr> 
+                                <th colspan="2">
+                                    OMS Admin delete details
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="width: 40%;">
+                                    <label for="idDelete">Select Id to delete</label>
+                                </td>
+                                <td>
+                                    <select name="idDelete" class="form-control" id="idDelete">
+                                        {% for x in mydetails %}
+                                        <option value="{{x.id}}">{{x.id}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="right" colspan="2">
+                                    <input type="submit" name="delete" id="delete" value="Delete">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
             </div>
-            <div class="col">
-                <form action="../add/{{adminName}}" method="get" id="addform" onsubmit="return alertLogin()">
-                    <table>
+        
+        <div class="row card">
+            <div>
+                {% if verify %}
+                <div class="col">
+                    <table style="border: none;">
                         <tr>
-                            <td>
-                                <label for="brand">Brand</label>
-                            </td>
-                            <td>
-                                <input type="text" id="brand" name="brand" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="shipMethod">Ship Method</label>
-                            </td>
-                            <td>
-                                <input type="text" id="shipMethod" name="shipMethod" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="processingDays">Processing Days</label>
-                            </td>
-                            <td>
-                                <input type="number" id="processingDays" name="processingDays" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="processingDaysType">Processing Days Type</label>
-                            </td>
-                            <td>
-                                <input type="text" id="processingDaysType" name="processingDaysType" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="min">Min</label>
-                            </td>
-                            <td>
-                                <input type="number" id="min" name="min" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="max">Max</label>
-                            </td>
-                            <td>
-                                <input type="number" id="max" name="max" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="processingDate">Processing Date</label>
-                            </td>
-                            <td>
-                                <input type="date" id="processingDate" name="processingDate" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="availableToPromiseDate">Available To Promise Date</label>
-                            </td>
-                            <td>
-                                <input type="date" id="availableToPromiseDate" name="availableToPromiseDate" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="cutOff">CutOff</label>
-                            </td>
-                            <td>
-                                <input type="number" id="cutOff" name="cutOff" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">
-                                <a href="../show/{{adminName}}" id="show">Show</a>
-                            </td>
-                           {% if adminName == '' %}
-                            <script>
-                                document.getElementById('show').href = 'omsadmin';
-                                document.getElementById('show').addEventListener("click", function () { alert('please login'); });
-                            </script>
-                            {% endif %}
-                            <td>
-                                <input type="submit" id="add" value="Add">
-                            </td>
+                            <th style="border: none;"> OMS Admin Details</th>
                         </tr>
                     </table>
-                </form>
-            </div>
-            <div class="col">
-                <table style="border: none;">
-                    <tr>
-                        <th style="border: none;"> OMS Admin update details</th>
-                    </tr>
-                </table>
-                <form action="../update/{{adminName}}" method="get" id="updateform" onsubmit="return alertLogin()">
-                    <table>
+                </div>
+                <div class="col ">
+                    {% for x in mydetails %}
+                    <table class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                         <tr>
                             <td>
-                                <label for="idUpdate">Select id to update</label>
+                                Id
                             </td>
                             <td>
-                                <select name="idUpdate" id="idUpdate">
-                                    {% for x in mydetails %}
-                                    <option value="{{x.id}}">{{x.id}}</option>
-                                    {% endfor %}
-                                </select>
+                                {{x.id}}
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <label for="fieldUpdate">Select field to update</label>
-                            </td>
-                            <td>
-                                <select name="fieldUpdate" id="fieldUpdate" onchange="typeChange()">
-                                    <option value="brand">Brand</option>
-                                    <option value="shipMethod">Ship Method</option>
-                                    <option value="processingDays">Processing Days</option>
-                                    <option value="processingDaysType">Processing Days Type</option>
-                                    <option value="min">Min</option>
-                                    <option value="max">Max</option>
-                                    <option value="processingDate">Processing Date</option>
-                                    <option value="availableToPromiseDate">Available To Promise Date</option>
-                                    <option value="cutOff">CutOff</option>
-                                </select>
-                            </td>
+                            <td>Brand</td>
+                            <td>{{x.brand}} </td>
+                        </tr>
+                        <tr>
+                            <td>Ship Method</td>
+                            <td>{{x.shipMethod}}</td>
+                        </tr>
+                        <tr>
+                            <td>processing Days</td>
+                            <td>{{x.processingDays}}</td>
+                        </tr>
+                        <tr>
+                            <td>processing Days Type</td>
+                            <td>{{x.processingDaysType}}</td>
+                        </tr>
+                        <tr>
+                            <td>Min</td>
+                            <td>{{x.min}}</td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="newValue">Enter new value</label>
+                                Max
                             </td>
-                            <td>
-                                <input type="text" id="newValue" name="newValue" required>
-                            </td>
+                            <td>{{x.max}}</td>
                         </tr>
                         <tr>
-                            <td class="right">
-                                <input type="submit" id="update" value="Update">
-                            </td>
+                            <td>Processing Date</td>
+                            <td>{{x.processingDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Available To Promise Date</td>
+                            <td>{{x.availableToPromiseDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cut Off</td>
+                            <td>{{x.cutOff}}</td>
                         </tr>
                     </table>
-                </form>
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
-            <div class="col">
-                <table style="border: none;">
-                    <tr>
-                        <th style="border: none;"> OMS Admin delete details</th>
-                    </tr>
-                </table>
-                <form action="../delete/{{adminName}}" method="get" id="deleteform" onsubmit="return alertLogin()">
-                    <table>
-                        <tr>
-                            <td>
-                                <label for="idDelete">Select Id to delete</label>
-                            </td>
-                            <td>
-                                <select name="idDelete" id="idDelete">
-                                    {% for x in mydetails %}
-                                    <option value="{{x.id}}">{{x.id}}</option>
-                                    {% endfor %}
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="right">
-                                <input type="submit" name="delete" id="delete" value="Delete">
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            {% if verify %}
-            <div class="col">
-                <table style="border: none;">
-                    <tr>
-                        <th style="border: none;"> OMS Admin Details</th>
-                    </tr>
-                </table>
-            </div>
-            <div class="col">
-                {% for x in mydetails %}
-                <table>
-                    <tr>
-                        <td>
-                            Id
-                        </td>
-                        <td>
-                            {{x.id}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Brand</td>
-                        <td>{{x.brand}} </td>
-                    </tr>
-                    <tr>
-                        <td>Ship Method</td>
-                        <td>{{x.shipMethod}}</td>
-                    </tr>
-                    <tr>
-                        <td>processing Days</td>
-                        <td>{{x.processingDays}}</td>
-                    </tr>
-                    <tr>
-                        <td>processing Days Type</td>
-                        <td>{{x.processingDaysType}}</td>
-                    </tr>
-                    <tr>
-                        <td>Min</td>
-                        <td>{{x.min}}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Max
-                        </td>
-                        <td>{{x.max}}</td>
-                    </tr>
-                    <tr>
-                        <td>Processing Date</td>
-                        <td>{{x.processingDate}}</td>
-                    </tr>
-                    <tr>
-                        <td>Available To Promise Date</td>
-                        <td>{{x.availableToPromiseDate}}</td>
-                    </tr>
-                    <tr>
-                        <td>Cut Off</td>
-                        <td>{{x.cutOff}}</td>
-                    </tr>
-                </table>
-                {% endfor %}
-            </div>
-            {% endif %}
         </div>
         <div class="row">
             <div class="col">
