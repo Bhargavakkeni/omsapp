@@ -20,7 +20,7 @@
 
         div.row {
             margin: 20px auto;
-            width: 50%;
+            width: auto;
         }
 
 
@@ -69,6 +69,11 @@
             color: red;
             font-size: large;
         }
+        @media screen and (min-width: 750px) {
+            div.row{
+                width: 50%;
+            }
+        }
     </style>
 
 </head>
@@ -79,7 +84,7 @@
         <h1> <a href="/home">Home</a></h1>
     </nav>
 
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="row card card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
 
@@ -92,11 +97,13 @@
                 <form action="verifyUser" method="GET">
                     <!--using 'verifyUser' instead '/verifyUser makes the path till now directly append to it instead from project urls.py-->
                     <label for="userName">User Name <span>*</span></label>
-                    <input type="text" class="form-control" name="userName" id="userName" autocomplete="off" autofocus required>
+                    <input type="text" class="form-control" name="userName" id="userName" autocomplete="off" autofocus
+                        required>
                     <label for="password">Password <span>*</span></label>
-                    <input type="password" class="form-control" name="password" id="password" autocomplete="off" required>
-                    <input type="submit"  name="submit" id="submit" value="Login">
-                    <input type="reset"  name="reset" id="reset" value="Reset">
+                    <input type="password" class="form-control" name="password" id="password" autocomplete="off"
+                        required>
+                    <input type="submit" name="submit" id="submit" value="Login">
+                    <input type="reset" name="reset" id="reset" value="Reset">
                 </form>
 
                 <!--Redirects the user to registration page-->
