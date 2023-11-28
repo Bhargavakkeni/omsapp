@@ -162,29 +162,46 @@ def add(request,adminName=''):
 
 #to update individual specified fields in the omsadmin
 def update(request,adminName=''):
+    mydict={}
     details=OmsAdmin.objects.filter(username_id=adminName).values()
     template=loader.get_template('loginapp/OmsAdmin1.html')
     idUpdate=request.GET['idUpdate']
-    fieldUpdate=request.GET['fieldUpdate']
-    newValue=request.GET['newValue']
-    kargs={fieldUpdate:newValue} #a dictionary to hold to be updated values
-    OmsAdmin.objects.filter(id=idUpdate).update(**kargs) #to send variable length key value arguments
-    mydict={
-        'updateverify':True,
-        'mydetails':details,
-        'adminName':adminName,
-    }
-    return HttpResponse(template.render(mydict,request))
+    if idUpdate=='None':
+        mydict={
+            'updateerror':True,
+            'mydetails':details,
+            'adminName':adminName,
+        }
+        return HttpResponse(template.render(mydict,request))
+    else:
+        fieldUpdate=request.GET['fieldUpdate']
+        newValue=request.GET['newValue']
+        kargs={fieldUpdate:newValue} #a dictionary to hold to be updated values
+        OmsAdmin.objects.filter(id=idUpdate).update(**kargs) #to send variable length key value arguments
+        mydict={
+            'updateverify':True,
+            'mydetails':details,
+            'adminName':adminName,
+        }
+        return HttpResponse(template.render(mydict,request))
 
 #to delete specified records from omsadmin
 def delete(request,adminName=''):
     template=loader.get_template('loginapp/OmsAdmin1.html')
-    idDelete=request.GET['idDelete']
-    OmsAdmin.objects.filter(id=idDelete).delete()
     details=OmsAdmin.objects.filter(username_id=adminName).values()
-    mydict={
-        'deleteverify':True,
-        'mydetails':details,
-        'adminName':adminName,
-    }
-    return HttpResponse(template.render(mydict,request))
+    idDelete=request.GET['idDelete']
+    if idDelete=='None':    
+        mydict={
+            'deleteerror':True,
+            'mydetails':details,
+            'adminName':adminName,
+        }
+        return HttpResponse(template.render(mydict,request))
+    else:
+        OmsAdmin.objects.filter(id=idDelete).delete() 
+        mydict={
+            'deleteverify':True,
+            'mydetails':details,
+            'adminName':adminName,
+        }
+        return HttpResponse(template.render(mydict,request))
