@@ -118,7 +118,10 @@ def uploading(request):
 #for displaying a CRUD omsadmin page when login is successful
 def omsadmin(request,adminName=''):
     template=loader.get_template('loginapp/OmsAdmin1.html')
-    details=OmsAdmin.objects.filter(username_id=adminName).values()
+    if adminName=='admin':
+        details=OmsAdmin.objects.all().values()
+    else:
+        details=OmsAdmin.objects.filter(username_id=adminName).values()
     #print(details)
     mydict={
         'mydetails':details,
@@ -128,7 +131,10 @@ def omsadmin(request,adminName=''):
 
 #to show all the records associated with username
 def show(request,adminName=''):
-    details=OmsAdmin.objects.filter(username_id=adminName).values()
+    if adminName=='admin':
+        details=OmsAdmin.objects.all().values()
+    else:
+        details=OmsAdmin.objects.filter(username_id=adminName).values()
     #print(details)
     mydict={
         'verify':True,
@@ -140,7 +146,10 @@ def show(request,adminName=''):
 
 #to add new records to the omsadmin corresponding to the username
 def add(request,adminName=''):
-    details=OmsAdmin.objects.filter(username_id=adminName).values()
+    if adminName=='admin':
+        details=OmsAdmin.objects.all().values()
+    else:
+        details=OmsAdmin.objects.filter(username_id=adminName).values()
     brand=request.GET['brand']
     shipMethod=request.GET['shipMethod']
     processingDays=request.GET['processingDays']
@@ -163,7 +172,10 @@ def add(request,adminName=''):
 #to update individual specified fields in the omsadmin
 def update(request,adminName=''):
     mydict={}
-    details=OmsAdmin.objects.filter(username_id=adminName).values()
+    if adminName=='admin':
+        details=OmsAdmin.objects.all().values()
+    else:
+        details=OmsAdmin.objects.filter(username_id=adminName).values()
     template=loader.get_template('loginapp/OmsAdmin1.html')
     idUpdate=request.GET['idUpdate']
     if idUpdate=='None':
@@ -188,7 +200,10 @@ def update(request,adminName=''):
 #to delete specified records from omsadmin
 def delete(request,adminName=''):
     template=loader.get_template('loginapp/OmsAdmin1.html')
-    details=OmsAdmin.objects.filter(username_id=adminName).values()
+    if adminName=='admin':
+        details=OmsAdmin.objects.all().values()
+    else:
+        details=OmsAdmin.objects.filter(username_id=adminName).values()
     idDelete=request.GET['idDelete']
     if idDelete=='None':    
         mydict={

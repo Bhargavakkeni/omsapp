@@ -216,7 +216,7 @@
                     <table class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                         <tr>
                             <th colspan="2">
-                                OMS Admin {{adminName}}
+                                OMS {{adminName}}
                             </th>
                         </tr>
                         <tr>
@@ -318,7 +318,7 @@
                     <table class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                         <tr>
                             <th colspan="2">
-                                OMS Admin update details
+                                OMS  update details
                             </th>
                         </tr>
                         <tr>
@@ -376,7 +376,7 @@
                     <table class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                         <tr>
                             <th colspan="2">
-                                OMS Admin delete details
+                                OMS  delete details
                             </th>
                         </tr>
                         <tr>
@@ -408,13 +408,23 @@
                 <div class="col">
                     <table style="border: none;">
                         <tr>
-                            <th style="border: none;"> OMS Admin Details</th>
+                            <th style="border: none;"> OMS  Details</th>
                         </tr>
                     </table>
                 </div>
                 <div class="col ">
                     {% for x in mydetails %}
                     <table class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                        {% if adminName == 'admin' %}
+                        <tr>
+                            <td>
+                                Created By
+                            </td>
+                            <td>
+                                {{x.username_id}}
+                            </td>
+                        </tr>
+                        {% endif %}
                         <tr>
                             <td>
                                 Id
@@ -461,6 +471,7 @@
                             <td>Cut Off</td>
                             <td>{{x.cutOff}}</td>
                         </tr>
+                        
                     </table>
                     {% endfor %}
                 </div>
