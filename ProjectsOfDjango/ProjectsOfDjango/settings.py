@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'homeapp',
     'loginapp',
     'pollingapp',
+    'api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

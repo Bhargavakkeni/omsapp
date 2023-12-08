@@ -23,4 +23,5 @@ urlpatterns = [
     path('omsapp/',include('loginapp.urls')),
     path('calculatorapp/',include('calculatorapp.urls')),
     path('pollingapp/',include('pollingapp.urls')),
+    path('api/',include('api.urls')),
 ]
