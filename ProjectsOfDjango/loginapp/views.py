@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import LoginDetails,OmsAdmin
-from django.template import loader
+from django.template import loader,Context
+from django.views.decorators.csrf import csrf_protect
 # Create your views here.
 
 #global name to associate user with records and login
@@ -11,17 +12,19 @@ from django.template import loader
 def root(request):
     return HttpResponse('Server has started')
 
+@csrf_protect
 #for displaying login page
 def index(request):
-    template = loader.get_template('loginapp/index.html')
-    return HttpResponse(template.render())
+    #template = loader.get_template('loginapp/index.html')
+    return render(request,'loginapp/index.html')
 
 #for verifying the user login details
+@csrf_protect
 def verifyUser(request):
     #global adminName
     mydict={}
-    username=request.GET['userName']
-    password=request.GET['password']
+    username=request.POST['userName']
+    password=request.POST['password']
     #print(type(username))
     username=username.strip()
     #print(username,len(username))
@@ -45,8 +48,9 @@ def verifyUser(request):
         #print(adminName)
     else:
         mydict['error']=True
-    template = loader.get_template('loginapp/index.html') 
-    return HttpResponse(template.render(mydict,request))
+    #template = loader.get_template('loginapp/index.html') 
+    #return HttpResponse(template.render(mydict,request))
+    return render(request,'loginapp/index.html',context=mydict)
 
 #to go to password reset page
 def resetpass(request):

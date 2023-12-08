@@ -94,7 +94,8 @@
 
             <!--To send the user login details for verification-->
             <div class="col card-body">
-                <form action="verifyUser" method="GET">
+                <form action="verifyUser" method="post">
+                    {% csrf_token %}
                     <!--using 'verifyUser' instead '/verifyUser makes the path till now directly append to it instead from project urls.py-->
                     <label for="userName">User Name <span>*</span></label>
                     <input type="text" class="form-control" name="userName" id="userName" autocomplete="off" autofocus
