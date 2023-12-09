@@ -220,3 +220,10 @@ def delete(request,adminName=''):
             'adminName':adminName,
         }
         return HttpResponse(template.render(mydict,request))
+
+
+def apidetails(request,adminName=''):
+    mydict={
+        'adminName':adminName,
+    }
+    return render(request,'loginapp/apidetails.html',context=mydict)
