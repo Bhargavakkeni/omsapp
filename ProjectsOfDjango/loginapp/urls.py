@@ -15,5 +15,7 @@ urlpatterns=[
     path('logout',views.logout,name='logout'),  #url to logout from the omsadmin 
     path('resetpass',views.resetpass,name='resetpass'), # url to go to forgot password html to reset the password
     path('changepass',views.changepass,name='changepass'), #url to change the password
-    
+    path('apidetails/<str:adminName>',views.apidetails,name='apidetails'),
+    path('apidetails',views.apidetails,name='apidetails0'),
+
 ]
